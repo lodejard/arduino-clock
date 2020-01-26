@@ -1,3 +1,22 @@
 [submodule "libraries/the_synth"]
 	path = libraries/the_synth
 	url = git@github.com:lodejard/the_synth.git
+[submodule "libraries/Adafruit_ILI9341"]
+	path = libraries/Adafruit_ILI9341
+	url = https://github.com/adafruit/Adafruit_ILI9341.git
+	branch = 1.5.4
+[submodule "libraries/Adafruit-GFX-Library"]
+	path = libraries/Adafruit-GFX-Library
+	url = https://github.com/adafruit/Adafruit-GFX-Library.git
+[submodule "libraries/XPT2046_Touchscreen"]
+	path = libraries/XPT2046_Touchscreen
+	url = https://github.com/PaulStoffregen/XPT2046_Touchscreen.git
+[submodule "libraries/AWind"]
+	path = libraries/AWind
+	url = https://github.com/AndreiDegtiarev/AWind.git
+[submodule "libraries/AFrame"]
+	path = libraries/AFrame
+	url = https://github.com/AndreiDegtiarev/AFrame.git
+[submodule "libraries/ASensor"]
+	path = libraries/ASensor
+	url = https://github.com/AndreiDegtiarev/ASensor.git
