@@ -7,7 +7,7 @@
 #include "Adafruit_ILI9341.h"
 #include "DSEG14_Classic_Bold_Italic_72.h"
 #include "XPT2046_Touchscreen.h"
-#include "TouchEvent.h"
+// #include "TouchEvent.h"
 #include "streamFlow.h"
 #include "StringPrint.h"
 
@@ -46,7 +46,7 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 #define TOUCH_IRQ 255     //touch screen interrupt
 
 XPT2046_Touchscreen touch(TOUCH_CS, TOUCH_IRQ);
-TouchEvent tevent(touch);
+// TouchEvent tevent(touch);
 
 DS3231 Clock;
 
@@ -213,8 +213,8 @@ void setup()
     tft.setTextColor(RGB(185, 128, 0));
     tft.fillScreen(ILI9341_BLACK);
 
-    tevent.setResolution(tft.width(),tft.height());
-    tevent.setDrawMode(false);
+    // tevent.setResolution(tft.width(),tft.height());
+    // tevent.setDrawMode(false);
 }
 
 struct Current {
@@ -267,7 +267,7 @@ void loop()
   }
 
   //poll for touch events
-  tevent.pollTouchScreen();
+  // tevent.pollTouchScreen();
 }
 
 void onClick(TS_Point p)

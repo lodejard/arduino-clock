@@ -8,9 +8,11 @@
 [submodule "libraries/Adafruit-GFX-Library"]
 	path = libraries/Adafruit-GFX-Library
 	url = https://github.com/adafruit/Adafruit-GFX-Library.git
+	branch = 1.7.5
 [submodule "libraries/XPT2046_Touchscreen"]
 	path = libraries/XPT2046_Touchscreen
 	url = https://github.com/PaulStoffregen/XPT2046_Touchscreen.git
+	branch = v1.3
 [submodule "libraries/AWind"]
 	path = libraries/AWind
 	url = https://github.com/AndreiDegtiarev/AWind.git
@@ -20,3 +22,10 @@
 [submodule "libraries/ASensor"]
 	path = libraries/ASensor
 	url = https://github.com/AndreiDegtiarev/ASensor.git
+[submodule "libraries/DS3231"]
+	path = libraries/DS3231
+	url = https://github.com/NorthernWidget/DS3231.git
+	branch = v1.0.2
+[submodule "libraries/streamFlow"]
+	path = libraries/streamFlow
+	url = https://github.com/neu-rah/streamFlow
