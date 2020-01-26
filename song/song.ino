@@ -15,8 +15,6 @@
 // HTTP://dzlsevilgeniuslair.blogspot.dk
 // HTTP://illutron.dk
 
-#define USE_TIMERB0
-
 #include <synth.h>
 #include "notes.h"
 #include "song.h"
@@ -50,12 +48,6 @@ void setup()
     else
       edgar.mTrigger(0,melody[thisNote]+32);
     delay(noteDuration);
-
-    unsigned int tm = tim;
-    int lv = lastvalue;
-    Serial.print(tm, DEC);
-    Serial.print(" ");
-    Serial.println(lv, DEC);
 
     // to distinguish the notes, set a minimum time between them.
     // the note's duration + 30% seems to work well:
