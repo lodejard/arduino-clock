@@ -31,8 +31,9 @@
 
 #include "WindowsManager.h"
 #include "Log.h"
-#include "TextExampleWindow.h"
 #include "DefaultDecorators.h"
+
+#include "TextExampleWindow.h"
 
 #define TFT_CS 10
 #define TFT_DC 9
@@ -76,7 +77,6 @@ public:
 	///Set active font
 	virtual void SetFontImpl(AFont *font)
 	{
-		out << F("SetFontImpl ")<<font->Name<<endln;
 		if (font != NULL)
 			SetFont(((AFontGFX *)font)->Font, ((AFontGFX *)font)->Size);
 		else 
@@ -85,8 +85,6 @@ public:
 
 	void SetFont(GFXfont* font, uint8_t size)
 	{
-		out << "font " << (font == NULL ? "null" : " not null");
-		out << " size " << size << endln;
 		_display->setFont(font);
 		_display->setTextSize(size);
 	}
@@ -109,10 +107,7 @@ class TouchXPT2046 : public Touch
 	int16_t _y;
 	
 public:
-	TouchXPT2046(XPT2046_Touchscreen *touch):Touch(), _touch(touch)
-	{
-
-	}
+	TouchXPT2046(XPT2046_Touchscreen *touch) : Touch(), _touch(touch), _x0(0), _y0(0), _x1(320), _y1(200) { }
 
 	void scale(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 	{
@@ -126,14 +121,17 @@ public:
 	{
 		return _touch->touched();
 	}
+
 	int16_t getX()
 	{
 		return _x;
 	};
+
 	int16_t getY()
 	{
 		return _y;
 	}
+
 	void read()
 	{
 		uint16_t x, y;
