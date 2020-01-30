@@ -28,7 +28,7 @@
 #include "AWind/DC_GfxTFT.h"
 #include "AWind/TouchXPT2046.h"
 #include "DSEG14_Classic_Bold_Italic_72.h"
-#include "Fonts/FreeSans12pt7b.h"
+#include "Fonts/FreeSans9pt7b.h"
 
 #include "ClockMainWindow.h"
 #include "TimeDialog.h"
@@ -97,7 +97,7 @@ void setup()
 
     DefaultDecorators::InitAll();
 
-		Environment::Get()->RegisterFont(new AFontGFX(F("Big"), &FreeSans12pt7b, 1));
+		Environment::Get()->RegisterFont(new AFontGFX(F("Big"), &FreeSans9pt7b, 1));
 		Environment::Get()->RegisterFont(new AFontGFX(F("Small"), NULL, 1));
 		Environment::Get()->RegisterFont(new AFontGFX(F("Clock"), &DSEG14_Classic_Bold_Italic_72, 1));
 

@@ -2,7 +2,7 @@
 
 #include "Dialog.h"
 #include "RadioButton.h"
-//#include "TextBoxStrTouch.h"
+#include "TextBoxNumber.h"
 
 class TimeDialog : public Dialog, IContentChangedEventReceiver
 {
@@ -12,9 +12,9 @@ class TimeDialog : public Dialog, IContentChangedEventReceiver
 	char _newTime[24];
 
 	Label  *_oldTimeLabel;
-	TextBoxTString<char>  *_oldTimeText;
+	TextBoxTString<char> *_oldTimeText;
 	Label  *_newTimeLabel;
-	TextBoxTString<char>  *_newTimeText;
+	TextBoxNumber *_newTimeText;
 
 	RadioButton    *_amControl;
 	RadioButton    *_pmControl;
@@ -26,13 +26,11 @@ public:
 		_oldTime[0] = 0;
 		_newTime[0] = 0;
 
-		AddChild(_oldTimeLabel = new Label(0,0,0,0,F("Current Time:")));
-		_oldTimeLabel->SetHorizontalAlignment(DC::HorizontalAlignment::Right);
+		_oldTimeLabel = NewLabel(F("Current Time:"));
 		AddChild(_oldTimeText = new TextBoxTString<char>(0,0,0,0,_oldTime));
 
-		AddChild(_newTimeLabel = new Label(0,0,0,0,F("Update Time:")));
-		_newTimeLabel->SetHorizontalAlignment(DC::HorizontalAlignment::Right);
-		AddChild(_newTimeText = new TextBoxTString<char>(0,0,0,0,_newTime));
+		_newTimeLabel = NewLabel(F("Update Time:"));
+		AddChild(_newTimeText = new TextBoxNumber());
 		_newTimeText->RegisterContentChangedReceiver(this);
 
 		_amControl = NewRadio(F("AM"));
@@ -59,6 +57,18 @@ public:
 		btn->RegisterTouchEventReceiver(this);
 		AddChild(btn);
 		return btn;
+	}
+
+	Label* NewLabel(const __FlashStringHelper * caption)
+	{
+		Label* label = new Label(0,0,0,0, caption);
+		label->SetFont(F("Big"));
+		//label->SetDecorators(Environment::Get()->FindDecorators());
+		label->SetHorizontalAlignment(DC::HorizontalAlignment::Right);
+
+		label->SetMargins(5,5);
+		AddChild(label);
+		return label;
 	}
 
 	void Initialize(DS3231* clock) {
@@ -90,6 +100,7 @@ public:
 		if (visible) {
 			bool h12, PM;
 			int hour = _clock->getHour(h12, PM);
+			int minute = _clock->getMinute();
 			if (h12 && !PM) {
 				SetChecked(_amControl);
 			} else if (h12 && PM) {
@@ -97,6 +108,14 @@ public:
 			} else {
 				SetChecked(_24hControl);
 			}
+
+			_oldTime[0] = '0' + hour / 10;
+			_oldTime[1] = '0' + minute % 10;
+			_oldTime[2] = ':';
+			_oldTime[3] = '0' + minute / 10;
+			_oldTime[4] = '0' + minute % 10;
+			_oldTime[5] = 0;
+			_oldTimeText->SetText(_oldTime);
 		}
 	}
 

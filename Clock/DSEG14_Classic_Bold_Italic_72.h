@@ -139,7 +139,9 @@ const GFXglyph DSEG14_Classic_Bold_Italic_72Glyphs[] PROGMEM = {
 	  {  5045 + ZERO_OFFSET,  48,  69,  60,    7,  -72 }, // '7'
 	  {  5459 + ZERO_OFFSET,  51,  72,  60,    4,  -72 }, // '8'
 	  {  5918 + ZERO_OFFSET,  48,  72,  60,    7,  -72 }, // '9'
-	  {  6350 + ZERO_OFFSET,  13,  38,  15,    1,  -54 }, // ':'
+	  {  6350 + ZERO_OFFSET,  13,  38,  15,    1,  -54 } // ':'
+	  #ifndef REDUCED_FONT 
+	  ,
 	  {  6412,  20,  48,  27,    2,  -48 }, // ';'
 	  {  6532,  39,  62,  60,    7,  -62 }, // '<'
 	  {  6835,  40,  40,  60,    7,  -40 }, // '='
@@ -207,6 +209,7 @@ const GFXglyph DSEG14_Classic_Bold_Italic_72Glyphs[] PROGMEM = {
 	  { 29264,  20,  48,  27,    2,  -48 }, // '{'
 	  { 29384,  14,  52,  60,   23,  -62 }, // '|'
 	  { 29475,  20,  48,  27,    2,  -48 } // '}'
+	  #endif
 };
 const GFXfont DSEG14_Classic_Bold_Italic_72 PROGMEM = {
-(uint8_t  *)DSEG14_Classic_Bold_Italic_72Bitmaps,(GFXglyph *)DSEG14_Classic_Bold_Italic_72Glyphs,0x20, 0x7E, 79};
+(uint8_t  *)DSEG14_Classic_Bold_Italic_72Bitmaps,(GFXglyph *)DSEG14_Classic_Bold_Italic_72Glyphs,0x20, 59 /*0x7E*/, 79};
