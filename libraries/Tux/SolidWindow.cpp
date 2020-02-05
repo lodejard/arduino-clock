@@ -5,6 +5,8 @@ SolidWindow::SolidWindow(Color color)
 {
 }
 
+void SolidWindow::color(Color color) {_color = color;}
+
 void SolidWindow::draw(Display* display, Point origin)
 {
     display->color(_color);

@@ -27,7 +27,10 @@ XPT2046_Touchscreen ts(TS_CS, TS_IRQ);
 #include "ui/BorderWindow.h"
 #include "ui/SolidWindow.h"
 #include "ui/ClippingWindow.h"
+#include "ui/TextWindow.h"
+
 #include "devices/Adafruit_GFX_Display.h"
+#include "devices/Adafruit_GFX_Font.h"
 
 UserInterfaceDisplay<Adafruit_GFX_Display> ui(&tft);
 
@@ -42,7 +45,7 @@ void NewButton(Window* window, Rect rc)
     Window* frame2 = new BorderWindow(Color(255,128,128),Color(128,0,0),1);
     control->attach(frame2);
 
-    Window* red = new SolidWindow(Color(255,0,0));
+    Window* red = new TextWindow("Hello World!", NULL, TextAlignment::Center, Color(0,0,0), Color(255,0,0));
     control->attach(red);
 
     control->position(rc);
@@ -51,6 +54,10 @@ void NewButton(Window* window, Rect rc)
     frame2->position(rc.shrink(1));
     red->position(rc.shrink(2));
 }
+
+#include "Fonts/FreeSansBoldOblique18pt7b.h"
+
+#include "streamFlow.h"
 
 void setup()
 {
@@ -72,12 +79,49 @@ void setup()
     NewButton(window, Rect(50,90,75,25));
     NewButton(window, Rect(150,90,75,25));
 
+    Adafruit_GFX_Font* font = new Adafruit_GFX_Font(&FreeSansBoldOblique18pt7b, 1); 
+
+    TextMetrics fontMetrics;
+    font->measureFont(&fontMetrics);
+    Serial
+        << " metrics.verticalAdvance " << fontMetrics.verticalAdvance
+        << " metrics.bitmapAboveBaseline " << fontMetrics.bitmapAboveBaseline
+        << " metrics.bitmapBelowBaseline " << fontMetrics.bitmapBelowBaseline
+        << endl
+        << " metrics.horizontalAdvance " << fontMetrics.horizontalAdvance
+        << " metrics.horizontalOverhang " << fontMetrics.horizontalOverhang
+        << " metrics.horizontalUnderhang " << fontMetrics.horizontalUnderhang
+        << endl;
+
+    TextWindow* fancy = new TextWindow(F("Fancy fonts"), font, TextAlignment::TopLeft, Color(255,255,255), Color(64,64,64));
+    TextMetrics fancyMetrics;
+    font->measureText(fancy->text(), &fancyMetrics);
+
+    Serial
+        << " metrics.verticalAdvance " << fancyMetrics.verticalAdvance
+        << " metrics.bitmapAboveBaseline " << fancyMetrics.bitmapAboveBaseline
+        << " metrics.bitmapBelowBaseline " << fancyMetrics.bitmapBelowBaseline
+        << endl
+        << " metrics.horizontalAdvance " << fancyMetrics.horizontalAdvance
+        << " metrics.horizontalOverhang " << fancyMetrics.horizontalOverhang
+        << " metrics.horizontalUnderhang " << fancyMetrics.horizontalUnderhang
+        << endl;
+
+    fancy->position(Rect(
+        100, 
+        150, 
+        fancyMetrics.horizontalUnderhang + fancyMetrics.horizontalAdvance + fancyMetrics.horizontalOverhang, 
+        fancyMetrics.bitmapAboveBaseline + fancyMetrics.bitmapBelowBaseline));
+    window->attach(fancy);
+
     ui.desktop(window);
 
     Serial.println("setup complete");
+    Serial.flush();
 }
 
 void loop()
 {
+    (Serial<<"loop"<<endl).flush();
     ui.loop();
 }

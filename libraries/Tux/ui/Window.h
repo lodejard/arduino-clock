@@ -1,7 +1,6 @@
 #pragma once
 #include "Arduino.h"
-#include "ui/Rect.h"
-#include "ui/Point.h"
+#include "core/Rect.h"
 #include "devices/Display.h"
 
 class Window {
@@ -23,7 +22,8 @@ public:
     const Rect& position();
     virtual void position(const Rect& position);
 
-    inline Point origin() {return _position.origin();}
+    inline const Point& origin() const {return _position.origin();}
+    inline const Size& size() const {return _position.size();}
 
     inline int16_t left() {return _position.left();}
     inline int16_t top() {return _position.top();}

@@ -1,4 +1,3 @@
-
 #include "ui/ParentWindow.h"
 
 ParentWindow::ParentWindow() :

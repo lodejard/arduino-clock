@@ -20,11 +20,18 @@ void UserInterface::desktop(Window* window) {
 
 void UserInterface::loop()
 {
-    drawRecursive(desktop(), desktop()->origin());
+    Point origin = desktop()->origin();
+    drawRecursive(desktop(), origin);
 }
 
+#include "streamFlow.h"
 void UserInterface::drawRecursive(Window* window, Point origin)
 {
+    Serial
+        << F(" drawRecursive window ") << hex(window)
+        << F(" position ") << window->position()
+        << endl;
+
     window->draw(display(), origin);
     for(Window* scan = window->child(); scan != NULL; scan = scan->next())
     {
